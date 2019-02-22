@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Edit Trip</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body class="p-4">
+    <a style="display: inline block; float: right;" href="/logout">Logout</a>
+    <h3>Hello {{ request.session.logged_in_user_fname }}! Let's edit your trip!</h3>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li style="color: red;">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div>
+        <form  action="/dashboard/user_edit_item" method="post">
+            <input type="hidden" name="trip_id" value="{{ trip_to_edit.id }}">
+            <label class="mt-2" for="dest">Destination</label>
+            <input style="border: 2px solid black" type="text" name="dest" value="{{ trip_to_edit.desti }}">
+            <br>
+            <label class="mt-2" for="start">Start Date</label>
+            <input style="border: 2px solid black" type="date" name="start" value="{{ trip_to_edit.start|date:'o-m-d' }}">
+            <i class="ml-1 fa fa-calendar" style="font-size:36px"></i>
+            <br>
+            <label class="mt-2" for="end" >End Date</label>
+            <input style="border: 2px solid black" type="date" name="end" value="{{ trip_to_edit.end|date:'o-m-d' }}">
+            <i class="ml-1 fa fa-calendar" style="font-size:36px"></i>
+            <br>
+            <label class="align-top" for="plan">Plan</label>
+            <textarea style="border: 2px solid black" name="plan" id="plan" cols="30" rows="10">{{ trip_to_edit.plan }}</textarea>
+            <br>
+            <a href="/dashboard">Cancel</a>
+            {% csrf_token %}
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

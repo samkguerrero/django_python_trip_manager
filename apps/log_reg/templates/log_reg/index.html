@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login and Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        input {
+            border: 1px solid black !important;
+        }
+    </style>
+</head>
+<body class="container">
+    <h1 class="mt-4">Login and Registration</h1>
+    <br>
+    <div class="align-top d-inline-block" style="width: 500px">
+        <div class="form-group">
+            <form action='/process' method='post'>
+                <h2>Register here!</h2>
+                <label class="mt-2" for="fname">First name:</label>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        {% if message.tags == 'fname error' %}
+                            <li style="color: red;">{{ message }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <input type='text' name='fname' class="w-75 form-control">
+                <label class="mt-2" for="lname">Last Name:</label>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        {% if message.tags == 'lname error' %}
+                            <li style="color: red;">{{ message }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <input type='text' name='lname' class="w-75 form-control">
+                <label class="mt-2" for="email">Email:</label>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        {% if message.tags == 'email error' %}
+                            <li style="color: red;">{{ message }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <input type='text' name='email' class="w-75 form-control">
+                <label class="mt-2" for="password">Password:</label>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        {% if message.tags == 'password error' %}
+                            <li style="color: red;">{{ message }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <input type='password' name='password' class="w-75 form-control">
+                <label class="mt-2" for="cpassword">Confirm Password:</label>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        {% if message.tags == 'cpassword error' %}
+                            <li style="color: red;">{{ message }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <input type='password' name='cpassword' class="w-75 form-control">
+                <br>
+                {% csrf_token %}
+                <input type='submit' value='Register!' class="btn btn-success float-left" style="margin-right: 100px">
+            </form>
+        </div>
+    </div>
+
+    <div class="align-top d-inline-block" style="width: 500px">
+        <div class="form-group">
+            <form action='/login' method='post'>
+                <h2>Login here!</h2>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        {% if message.tags == 'login_email error' %}
+                            <li style="color: red;">{{ message }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        {% if message.tags == 'duplicate_email error' %}
+                            <li style="color: red;">{{ message }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <label class="mt-2" for="email" >Email:</label>                 
+                <!-- <input type='text' name='email' class="w-75 form-control" value="{{request.session.attempted_email}}"> -->
+                <input type='text' name='email' class="w-75 form-control" >
+                {% if request.session.failed_password %}
+                    <label class="mt-2" for="password">Password:</label>
+                {% else %}
+                    <label class="mt-2" for="password">Password:</label>
+                    <li style="margin-bottom: 10px; color: red;">Wrong Password</li>
+                {% endif %}
+                <input type='password' name='password' class="w-75 form-control">
+                <br>
+                {% csrf_token %}
+                <input type='submit' value='Login!' class="btn btn-success float-left" style="margin-right: 100px">
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<a href="/">Home</a>
+<a href="/feature/add">Add and Review</a>
+<a href="/logout">Logout</a>
+
+<h1>User Alias: </h1>
+<p>Name: {{ user_to_view.first_name }} {{ user_to_view.last_name }}</p>
+<p>Email: {{ user_to_view.email }}</p>
+<p>Total Reviews: </p>
+
+<p>Post Reviews on the following books</p>
+
+
+</body>
+</html>

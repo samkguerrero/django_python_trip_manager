@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Edit Trip</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+</head>
+<body class="p-3">
+    <a style="display: inline-block; float:right" href="/logout">Logout</a>
+    <a style="display: inline-block; float:right; margin-right: 5px;" href="/dashboard">Dashboard</a>
+    <h3>Hello {{ request.session.logged_in_user_fname }}! Read about this trip!</h3>
+    <p><b>{{ trip_to_show.desti }}</b></p>
+    <div style="border: 2px solid black; width: 25%">
+        <p>Start Date: {{ trip_to_show.start|date:'n/j/y' }}</p>
+        <p>End Date: {{ trip_to_show.end|date:'n/j/y'  }}</p>
+        <p>Created On: {{ trip_to_show.created_at|date:'n/j/y'  }}</p>
+        <p>Updated On: {{ trip_to_show.updated_at|date:'n/j/y'  }}</p>
+        <p>Plan: {{ trip_to_show.plan }}</p>
+        <p>Created by: {{ trip_to_show.event_owner.first_name }}</p>
+    </div>
+    <br>
+    <div>
+        <p>People who've joined the trip:</p>
+        <ul>
+            {% for attendee in trip_attendees %}
+                {% if attendee.first_name != trip_to_show.event_owner.first_name %}
+                    <li>{{ attendee.first_name }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

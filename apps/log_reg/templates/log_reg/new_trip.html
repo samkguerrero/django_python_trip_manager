@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>New Trip</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+</head>
+<body class="p-3">
+        <a class="mr-5 pt-2 d-inline-block float-right" href="/logout">Logout</a>
+    <h3>Hello {{ request.session.logged_in_user_fname }}! Create a trip!</h3>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li style="color: red;">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div style="text-align: left; border: 2px solid black" class="container float-left mt-2 w-25">
+        <form class="form" action="/dashboard/user_add_item" method="post">
+            <input type="hidden" name="user_creating_trip_id" value="{{ request.session.logged_in_user_id }}">
+            <label style="margin-right: 20px" for="dest">Destination</label>
+            <input type="text" name="dest">
+            <br>
+            <label style="margin-right: 20px" for="start">Start Date</label>
+            <input type="date" name="start">
+            <br>
+            <label style="margin-right: 20px" for="end" >End Date</label>
+            <input type="date" name="end">
+            <br>
+            <label style="margin-right: 20px" class="align-top" for="plan">Plan</label>
+            <textarea name="plan" id="plan" cols="30" rows="10"></textarea>
+            <br>
+            <a class="btn btn-primary" href="/dashboard">Cancel</a>
+            {% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
