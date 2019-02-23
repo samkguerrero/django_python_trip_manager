@@ -78,15 +78,18 @@
         </thead>
         <tbody>
             {% for other_trip in others_trips  %}
-                <tr>
-                    <td><a href="/trips/{{ other_trip.id }}">{{ other_trip.desti }}</a></td>
-                    <td>{{ other_trip.start|date:'n/j/y' }}</td>
-                    <td>{{ other_trip.end|date:'n/j/y' }}</td>
-                    <td>{{ other_trip.plan }}</td>
-                    <td>
-                        <a href="/trips/join/{{ other_trip.id }}">Join</a>
-                    </td>
-                </tr>
+                {% if request.session.logged_in_user_fname != other_trip.event_owner.first_name %}
+                    <tr>
+                        <td><a href="/trips/{{ other_trip.id }}">{{ other_trip.desti }}</a></td>
+                        <td>{{ other_trip.start|date:'n/j/y' }}</td>
+                        <td>{{ other_trip.end|date:'n/j/y' }}</td>
+                        <td>{{ other_trip.plan }}</td>
+                        <td>
+                            <a href="/trips/join/{{ other_trip.id }}">Join</a>
+                        </td>
+                    </tr>
+
+                {% endif %}
             {% endfor %}
         </tbody>
     </table>

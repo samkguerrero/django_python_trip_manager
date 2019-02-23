@@ -74,7 +74,7 @@ def process(request):
                 email = request.POST['email'],
                 password = bcrypt.hashpw( request.POST['password'].encode(), bcrypt.gensalt())
             )
-            request.session['logged_in_user'] = request.POST['fname']
+            request.session['logged_in_user_fname'] = request.POST['fname']
             request.session['logged_in_user_id'] = new_user.id
             request.session['log_reg'] = 'registered'
             return redirect("/dashboard")
