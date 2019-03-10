@@ -1,4 +1,4 @@
-# trips
+Trip Manager
 
 Web application made in python with the Django framework
 
@@ -9,6 +9,6 @@ includes feature to add new trips <br />
 See trips other users have made <br />
 Join trips other users have made <br />
 
-![alt text](https://github.com/samkguerrero/django_python_trip_manager/blob/master/apps/log_reg/templates/trip1.png)
 ![alt text](https://github.com/samkguerrero/django_python_trip_manager/blob/master/apps/log_reg/templates/trip2.png)
+![alt text](https://github.com/samkguerrero/django_python_trip_manager/blob/master/apps/log_reg/templates/trip1.png)
 ![alt text](https://github.com/samkguerrero/django_python_trip_manager/blob/master/apps/log_reg/templates/trip3.png)
